@@ -3676,5 +3676,51 @@
             app.init();
         });
     </script>
+    <!-- ================== Bottom Navigation Bar ================== -->
+<nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-[#0a0a0a] border-t border-gray-800 z-50 py-1">
+  <div class="flex justify-around items-center max-w-md mx-auto">
+    
+    <a href="#" onclick="switchPage(0)" class="nav-item flex flex-col items-center text-[#00b4ff]">
+      <i class="fas fa-comments text-3xl"></i>
+      <span class="text-xs mt-1">الدردشات</span>
+    </a>
+
+    <a href="#" onclick="switchPage(1)" class="nav-item flex flex-col items-center text-gray-400">
+      <i class="fas fa-phone-alt text-3xl"></i>
+      <span class="text-xs mt-1">المكالمات</span>
+    </a>
+
+    <a href="#" onclick="switchPage(2)" class="nav-item flex flex-col items-center text-gray-400">
+      <i class="fas fa-book-open text-3xl"></i>
+      <span class="text-xs mt-1">القصص</span>
+    </a>
+
+    <a href="#" onclick="switchPage(3)" class="nav-item flex flex-col items-center text-gray-400">
+      <i class="fas fa-users text-3xl"></i>
+      <span class="text-xs mt-1">الأشخاص</span>
+    </a>
+
+    <a href="#" onclick="switchPage(4)" class="nav-item flex flex-col items-center text-gray-400">
+      <i class="fas fa-user text-3xl"></i>
+      <span class="text-xs mt-1">أنا</span>
+    </a>
+
+  </div>
+</nav>
+
+<script>
+// وظيفة التنقل بين الأزرار
+function switchPage(page) {
+  document.querySelectorAll('.nav-item').forEach((item, index) => {
+    if (index === page) {
+      item.classList.add('text-[#00b4ff]');
+      item.classList.remove('text-gray-400');
+    } else {
+      item.classList.remove('text-[#00b4ff]');
+      item.classList.add('text-gray-400');
+    }
+  });
+}
+</script>
 </body>
 </html>
