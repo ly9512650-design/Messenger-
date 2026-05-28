@@ -3677,50 +3677,58 @@
         });
 
 </script>
-    <!-- أسهم التنقل -->
-<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex gap-8 z-50">
+    <!-- أسهم التنقل الفعالة -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-10 z-[1000]">
   
-  <!-- السهم اليسار (Previous) -->
+  <!-- سهم السابق -->
   <button onclick="prevPage()" 
-          class="nav-arrow w-14 h-14 bg-[#1f1f1f] hover:bg-[#2a2a2a] border border-gray-700 rounded-full flex items-center justify-center text-3xl text-gray-300 shadow-lg transition-all active:scale-90">
+          class="w-16 h-16 bg-[#1f1f1f] hover:bg-[#2d2d2d] border-2 border-gray-600 rounded-2xl flex items-center justify-center text-4xl text-white shadow-2xl active:scale-90 transition-all">
     ←
   </button>
 
-  <!-- السهم اليمين (Next) -->
+  <!-- سهم التالي -->
   <button onclick="nextPage()" 
-          class="nav-arrow w-14 h-14 bg-[#1f1f1f] hover:bg-[#2a2a2a] border border-gray-700 rounded-full flex items-center justify-center text-3xl text-gray-300 shadow-lg transition-all active:scale-90">
+          class="w-16 h-16 bg-[#1f1f1f] hover:bg-[#2d2d2d] border-2 border-gray-600 rounded-2xl flex items-center justify-center text-4xl text-white shadow-2xl active:scale-90 transition-all">
     →
   </button>
 
 </div>
 
 <script>
-// المتغير اللي هيحفظ رقم الصفحة الحالية
+// قائمة أسماء الصفحات (غيرها حسب أسماء الـ divs عندك)
+const pages = ['chats', 'calls', 'stories', 'people', 'profile'];
 let currentPage = 0;
-const totalPages = 5; // غير الرقم ده لو عندك عدد صفحات مختلف
 
-function updateActiveButton() {
-  // هنا تقدر تضيف كود لتغيير الصفحة المعروضة
-  console.log("الصفحة الحالية: " + currentPage);
+// إخفاء كل الصفحات وإظهار واحدة
+function showPage(pageIndex) {
+  currentPage = pageIndex;
+  
+  pages.forEach((pageId, index) => {
+    const element = document.getElementById(pageId);
+    if (element) {
+      element.style.display = (index === currentPage) ? 'block' : 'none';
+    }
+  });
 }
 
+// السابق
 function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    updateActiveButton();
-  } else {
-    currentPage = totalPages - 1; // لو وصلت أول صفحة يرجع للأخيرة
-  }
+  let newPage = currentPage - 1;
+  if (newPage < 0) newPage = pages.length - 1;   // loop
+  showPage(newPage);
 }
 
+// التالي
 function nextPage() {
-  if (currentPage < totalPages - 1) {
-    currentPage++;
-    updateActiveButton();
-  } else {
-    currentPage = 0; // لو وصلت آخر صفحة يرجع للأولى
-  }
+  let newPage = currentPage + 1;
+  if (newPage >= pages.length) newPage = 0;     // loop
+  showPage(newPage);
 }
-</script>
+
+// تشغيل أول صفحة عند تحميل الموقع
+document.addEventListener('DOMContentLoaded', () => {
+  showPage(0);
+});
+ </script>
 </body>
 </html>
