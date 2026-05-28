@@ -3675,51 +3675,51 @@
         document.addEventListener('DOMContentLoaded', () => {
             app.init();
         });
-    </script>
-    <!-- ================== Bottom Navigation Bar ================== -->
-<nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-[#0a0a0a] border-t border-gray-800 z-50 py-1">
-  <div class="flex justify-around items-center max-w-md mx-auto">
-    
-    <a href="#" onclick="switchPage(0)" class="nav-item flex flex-col items-center text-[#00b4ff]">
-      <i class="fas fa-comments text-3xl"></i>
-      <span class="text-xs mt-1">الدردشات</span>
-    </a>
 
-    <a href="#" onclick="switchPage(1)" class="nav-item flex flex-col items-center text-gray-400">
-      <i class="fas fa-phone-alt text-3xl"></i>
-      <span class="text-xs mt-1">المكالمات</span>
-    </a>
+</script>
+    <!-- أسهم التنقل -->
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex gap-8 z-50">
+  
+  <!-- السهم اليسار (Previous) -->
+  <button onclick="prevPage()" 
+          class="nav-arrow w-14 h-14 bg-[#1f1f1f] hover:bg-[#2a2a2a] border border-gray-700 rounded-full flex items-center justify-center text-3xl text-gray-300 shadow-lg transition-all active:scale-90">
+    ←
+  </button>
 
-    <a href="#" onclick="switchPage(2)" class="nav-item flex flex-col items-center text-gray-400">
-      <i class="fas fa-book-open text-3xl"></i>
-      <span class="text-xs mt-1">القصص</span>
-    </a>
+  <!-- السهم اليمين (Next) -->
+  <button onclick="nextPage()" 
+          class="nav-arrow w-14 h-14 bg-[#1f1f1f] hover:bg-[#2a2a2a] border border-gray-700 rounded-full flex items-center justify-center text-3xl text-gray-300 shadow-lg transition-all active:scale-90">
+    →
+  </button>
 
-    <a href="#" onclick="switchPage(3)" class="nav-item flex flex-col items-center text-gray-400">
-      <i class="fas fa-users text-3xl"></i>
-      <span class="text-xs mt-1">الأشخاص</span>
-    </a>
-
-    <a href="#" onclick="switchPage(4)" class="nav-item flex flex-col items-center text-gray-400">
-      <i class="fas fa-user text-3xl"></i>
-      <span class="text-xs mt-1">أنا</span>
-    </a>
-
-  </div>
-</nav>
+</div>
 
 <script>
-// وظيفة التنقل بين الأزرار
-function switchPage(page) {
-  document.querySelectorAll('.nav-item').forEach((item, index) => {
-    if (index === page) {
-      item.classList.add('text-[#00b4ff]');
-      item.classList.remove('text-gray-400');
-    } else {
-      item.classList.remove('text-[#00b4ff]');
-      item.classList.add('text-gray-400');
-    }
-  });
+// المتغير اللي هيحفظ رقم الصفحة الحالية
+let currentPage = 0;
+const totalPages = 5; // غير الرقم ده لو عندك عدد صفحات مختلف
+
+function updateActiveButton() {
+  // هنا تقدر تضيف كود لتغيير الصفحة المعروضة
+  console.log("الصفحة الحالية: " + currentPage);
+}
+
+function prevPage() {
+  if (currentPage > 0) {
+    currentPage--;
+    updateActiveButton();
+  } else {
+    currentPage = totalPages - 1; // لو وصلت أول صفحة يرجع للأخيرة
+  }
+}
+
+function nextPage() {
+  if (currentPage < totalPages - 1) {
+    currentPage++;
+    updateActiveButton();
+  } else {
+    currentPage = 0; // لو وصلت آخر صفحة يرجع للأولى
+  }
 }
 </script>
 </body>
